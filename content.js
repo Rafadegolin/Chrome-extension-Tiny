@@ -1,12 +1,13 @@
 window.addEventListener("load", () => {
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.text) {
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.barcode) {
+      console.log("Código recebido pelo script", message.barcode);
       // Seleciona o input pelo ID
       const inputElement = document.getElementById("produto"); // Usando o ID do input
 
       if (inputElement) {
         // Insere o texto no input
-        inputElement.value = request.text;
+        inputElement.value = request.barcode;
         inputElement.dispatchEvent(new Event("input")); // Para notificar o evento de mudança
 
         // Simula o pressionamento da tecla 'Enter' para confirmar a busca
